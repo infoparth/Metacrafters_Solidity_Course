@@ -23,6 +23,10 @@ function addMember(address _add) public {
     emit memberAdded(msg.sender, _add);
 }
 
+function getMembers() public view returns(address[] memory){
+    return members[msg.sender];
+}
+
 function checkMember(address[] memory _arr, address _check) public returns (uint){
 
      uint val = _arr.length;
