@@ -1,6 +1,6 @@
 import {useState, useEffect} from "react";
 import {ethers} from "ethers";
-import test_abi from "../artifacts/contracts/Assessment.sol/Assessment.json";
+import test_abi from "../artifacts/contracts/events.sol/Test.json";
 
 export default function HomePage() {
   const [ethWallet, setEthWallet] = useState(undefined);
@@ -78,9 +78,17 @@ export default function HomePage() {
   }
 
   const getList = async() => {
+
+    if (!evenTes) {
+      // Wait for evenTes to be initialized
+      await getevenTesContract();
+    }
+
+    if (evenTes) {
     const array = await evenTes.getMembers();
     setArrayData(array);
   }
+};
 
 
   const initUser = () => {
@@ -114,9 +122,7 @@ export default function HomePage() {
       </div>
     )
   }
-  useEffect(() => {
-    getList();
-  }, []);
+  useEffect(() => {getWallet();}, []);
 
   return (
     <main className="container">
