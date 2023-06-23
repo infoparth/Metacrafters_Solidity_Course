@@ -9,7 +9,7 @@ export default function HomePage() {
   const [inputValue, setInputValue] = useState('');
   const [arrayData, setArrayData] = useState([]);
 
-  const contractAddress = "0x5FbDB2315678afecb367f032d93F642f64180aa3";
+  const contractAddress = "	0xe2f55536668747dbe0fd0e31ba22da7fdc5aefb2";
   const evenTesABI = test_abi.abi;
 
   const getWallet = async() => {
