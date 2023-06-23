@@ -7,9 +7,10 @@ export default function HomePage() {
   const [account, setAccount] = useState(undefined);
   const [evenTes, setevenTes] = useState(undefined);
   const [inputValue, setInputValue] = useState('');
+  const [inputValue_II, setInputValue_II] = useState('');
   const [arrayData, setArrayData] = useState([]);
 
-  const contractAddress = "	0xe2f55536668747dbe0fd0e31ba22da7fdc5aefb2";
+  const contractAddress = "0xe2f55536668747dbe0fd0e31ba22da7fdc5aefb2";
   const evenTesABI = test_abi.abi;
 
   const getWallet = async() => {
@@ -60,6 +61,10 @@ export default function HomePage() {
     setInputValue(event.target.value);
   }
 
+  const handleInputChange_II = (event) => {
+    setInputValue_II(event.target.value);
+  }
+
   const handleSubmit = async (event) => {
     if (evenTes){
     event.preventDefault();
@@ -72,7 +77,7 @@ export default function HomePage() {
 
   const remMem = async() => {
     if (evenTes) {
-      let tx = await evenTes.removeMember();
+      let tx = await evenTes.removeMember(inputValue_II);
       await tx.wait()
     }
   }
@@ -90,6 +95,7 @@ export default function HomePage() {
   }
 };
 
+//contract functions end here
 
   const initUser = () => {
     // Check to see if user has Metamask
@@ -112,9 +118,14 @@ export default function HomePage() {
             <button type="submit">Add Member</button>
             </form>
         </div>
-        <button onClick={remMem}>Remove Member</button>
         <div>
-            <button onClick={getList}>Fetch Array Data</button>
+            <form onSubmit={remMem}>
+            <input type="text" value={inputValue_II} onChange={handleInputChange_II} />
+            <button type="submit">Remove Member</button>
+            </form>
+        </div>
+        <div>
+            <button onClick={getList}>List of your Members</button>
             {arrayData.map((item, index) => (
             <div key={index}>{item}</div>
     ))}
@@ -126,7 +137,7 @@ export default function HomePage() {
 
   return (
     <main className="container">
-      <header><h1>Idk What this is, but Welcome!</h1></header>
+      <header><h1>Welcome to Add members</h1></header>
       {initUser()}
       <style jsx>{`
         .container {
